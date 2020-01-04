@@ -115,6 +115,9 @@ export default {
       this.visible=true;
     },
     toAddHandler(){
+      this.form={
+        type:"waiter"
+      }
       this.title="添加员工信息"
       this.visible=true;
     },
