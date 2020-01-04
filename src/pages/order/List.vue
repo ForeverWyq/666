@@ -74,7 +74,7 @@ export default {
                 this.order = response.data;
             })
         },
-        // 录入顾客信息
+        // 录入订单信息
         toAddHandler(){
             this.title="录入订单信息"
             // 重置
