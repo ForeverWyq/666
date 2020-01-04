@@ -10,7 +10,7 @@
         <!-- 表格 -->
         <el-table :data="orders.list" ref="multipleTable"  tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
-            <el-table-column label="订单编号" prop="id"></el-table-column>
+            <el-table-column label="订单编号" prop="id" width="200"></el-table-column>
             <el-table-column label="下单时间" prop="orderTime"></el-table-column>
             <el-table-column label="总价" prop="total"></el-table-column>
             <el-table-column label="状态" prop="status"></el-table-column>

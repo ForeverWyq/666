@@ -4,7 +4,8 @@
       <el-button size="small" type="primary" @click="toAddHandler">添加</el-button>
       <el-button size="small" type="danger">批量删除</el-button>
     </div>
-    <el-table ref="multipleTable" :data="employees" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+    <el-table ref="multipleTable" :data="employees" tooltip-effect="dark" 
+    style="width: 100%" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column fixed="left" prop="id" label="编号"></el-table-column>
       <el-table-column fixed="left" prop="username" label="用户名"></el-table-column>

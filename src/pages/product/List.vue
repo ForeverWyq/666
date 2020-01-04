@@ -8,7 +8,9 @@
         <!-- 按钮结束 -->
         <br>
         <!-- 表格 -->
-        <el-table :data="products">
+        <el-table ref="multipleTable" :data="products" tooltip-effect="dark" 
+        style="width: 100%" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="编号" prop="id" fixed="left"></el-table-column>
             <el-table-column label="产品名称" prop="name" fixed="left"></el-table-column>
             <el-table-column label="价格" prop="price" fixed="left"></el-table-column>
@@ -166,6 +168,9 @@ export default {
         },
         closeModalHandler(){
             this.visible=false;
+        },
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
         }
     },
     //用于存放要向网页中显示的数据
