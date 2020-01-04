@@ -1,6 +1,6 @@
 <template>
     <dev>
-        栏目管理
+        评论管理
     </dev>
 </template>
 <script>

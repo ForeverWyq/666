@@ -89,7 +89,7 @@ export const constantRoutes = [
     // name: 'Nested',
     meta: {
       title: '系统配置',
-      icon: 'nested'
+      icon: 'system'
     },
     children: [
       {
@@ -102,6 +102,20 @@ export const constantRoutes = [
         path: 'product',
         component: () => import('@/pages/product/List'),
         meta: { title: '产品管理', icon:"form" }
+      }
+    ]
+  },
+
+  {
+    path: '/address',
+    component: Layout,
+    children: [
+      {
+        path: 'List',
+        name: 'AddressList',
+        component: () => import('@/pages/address/List'),
+        // component: () => import('@/views/form/index'),
+        meta: { title: '地址管理', icon: 'link' }
       }
     ]
   },
@@ -135,8 +149,8 @@ export const constantRoutes = [
       {
         path: 'order',
         name: 'order-management',
-        component: () => import('@/views/table/index'),
-        meta: { title: '订单管理', icon: 'link' }
+        component: () => import('@/pages/order/List'),
+        meta: { title: '订单管理', icon: 'form' }
       }
     ]
   },
