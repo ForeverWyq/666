@@ -8,7 +8,7 @@
         <!-- 按钮结束 -->
         <br>
         <!-- 表格 -->
-        <el-table :data="customers">
+        <el-table :data="addresss">
             <el-table-column label="编号" prop="id" fixed="left"></el-table-column>
             <el-table-column label="省" prop="province" fixed="left"></el-table-column>
             <el-table-column label="市" prop="city" fixed="left"></el-table-column>
@@ -78,7 +78,7 @@ export default {
         loadData(){
             let url = "http://localhost:6677/address/findAll"
             request.get(url).then((response)=>{
-                this.customers = response.data;
+                this.addresss = response.data;
             })
         },
         // 录入地址信息
@@ -150,17 +150,13 @@ export default {
         return{
             title:"",
             visible:false,
-            customers:[],
+            addresss:[],
             form:{}
         }
     },
     created(){
         // vue实例创建完毕
-        let url = "http://localhost:6677/address/findAll"
-        request.get(url).then((response)=>{
-            // 将查询结果设置到customers中,this指向外部函数的this
-            this.customers = response.data;
-        })
+        this.loadData();
     }
 }
 </script>

@@ -8,7 +8,7 @@
         <!-- 按钮结束 -->
         <br>
         <!-- 表格 -->
-        <el-table :data="customers">
+        <el-table :data="products">
             <el-table-column label="编号" prop="id" fixed="left"></el-table-column>
             <el-table-column label="产品名称" prop="name" fixed="left"></el-table-column>
             <el-table-column label="价格" prop="price" fixed="left"></el-table-column>
@@ -93,15 +93,18 @@ export default {
         loadData(){
             let url = "http://localhost:6677/product/findAll"
             request.get(url).then((response)=>{
-                this.customers = response.data;
+                this.products = response.data;
             })
         },
-        // 录入栏目信息
-        toAddHandler(){
+        // 加载下拉菜单数据
+        loadcategry(){
             let url = "http://localhost:6677/category/findAll"
             request.get(url).then((response)=>{
                 this.options = response.data;
             })
+        },
+        // 录入栏目信息
+        toAddHandler(){
             this.title="添加产品信息"
             this.form={
                 type:"product"
@@ -110,10 +113,6 @@ export default {
         },
         // 修改栏目信息
         toUpdateHandler(row){
-            let url = "http://localhost:6677/category/findAll"
-            request.get(url).then((response)=>{
-                this.options = response.data;
-            })
             this.title="修改产品信息"
             this.form=row;
             this.visible=true;
@@ -174,7 +173,7 @@ export default {
         return{
             title:"",
             visible:false,
-            customers:[],
+            products:[],
             options: [],
             form:{
                 type:"product"
@@ -183,11 +182,8 @@ export default {
     },
     created(){
         // vue实例创建完毕
-        let url = "http://localhost:6677/product/findAll"
-        request.get(url).then((response)=>{
-            // 将查询结果设置到customers中,this指向外部函数的this
-            this.customers = response.data;
-        })
+        this.loadData();
+        this.loadcategry();
     }
 }
 </script>

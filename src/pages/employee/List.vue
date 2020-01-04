@@ -98,7 +98,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          let url = "http://134.175.154.93:6677/customer/deleteById?id="+id;
+          let url = "http://134.175.154.93:6677/employee/deleteById?id="+id;
           request.get(url).then((response)=>{
             this.loadData();
             this.$message({

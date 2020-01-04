@@ -8,12 +8,14 @@
         <br>
         <!-- 按钮结束 -->
         <!-- 表格 -->
-        <el-table :data="order">
+        <el-table :data="orders.list">
             <el-table-column label="订单编号" prop="id"></el-table-column>
             <el-table-column label="下单时间" prop="orderTime"></el-table-column>
             <el-table-column label="总价" prop="total"></el-table-column>
             <el-table-column label="状态" prop="status"></el-table-column>
             <el-table-column label="顾客Id" prop="customerId"></el-table-column>
+            <el-table-column label="员工Id" prop="waiterId"></el-table-column>
+            <el-table-column label="地址Id" prop="addressId"></el-table-column>
             <el-table-column label="操作">
                 <template v-slot="slot">
                     <a href="" @click.prevent="toDeleteHandler(slot.row.id)">
@@ -25,10 +27,11 @@
         </el-table>
         <!-- 表格结束 -->
         <!-- 分页 -->
-        <!-- <el-pagination
+        <el-pagination
             layout="prev, pager, next"
-            :total="50">
-        </el-pagination> -->
+            :total="orders.total"
+            @current-change="pageChageHandler">
+        </el-pagination>
         <!-- 分页结束 -->
         <!-- 模态框 -->
         <el-dialog
@@ -69,9 +72,16 @@ export default {
     // 用于存放网页中需要调用的方法
     methods:{
         loadData(){
-            let url = "http://localhost:6677/order/findAll"
-            request.get(url).then((response)=>{
-                this.order = response.data;
+            let url = "http://localhost:6677/order/queryPage"
+            request({
+                url,
+                method:"post",
+                headers:{
+                    "Content-Type":"application/x-www-form-urlencoded"
+                },
+                data:querystring.stringify(this.params)
+            }).then((response)=>{
+                this.orders=response.data
             })
         },
         // 录入订单信息
@@ -112,6 +122,10 @@ export default {
             })
             
         },
+        pageChageHandler(page){
+            this.params.page=page-1;
+            this.loadData();
+        },
         // 录入界面中点击确定调用的保存方法
         submitHandler(){
 
@@ -125,19 +139,19 @@ export default {
         return{
             title:"",
             visible:false,
-            order:[],
+            orders:{},
             form:{
                 type:"order"
+            },
+            params:{
+                page:0,
+                pageSize:10
             }
         }
     },
     created(){
         // vue实例创建完毕
-        let url = "http://localhost:6677/order/findAll"
-        request.get(url).then((response)=>{
-            // 将查询结果设置到customers中,this指向外部函数的this
-            this.order = response.data;
-        })
+        this.loadData();
     }
 }
 </script>
