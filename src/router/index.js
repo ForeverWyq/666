@@ -107,24 +107,10 @@ export const constantRoutes = [
   },
 
   {
-    path: '/address',
+    path: '/audit',
     component: Layout,
-    children: [
-      {
-        path: 'List',
-        name: 'AddressList',
-        component: () => import('@/pages/address/List'),
-        // component: () => import('@/views/form/index'),
-        meta: { title: '地址管理', icon: 'link' }
-      }
-    ]
-  },
-
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
+    // redirect: '/example/table',
+    // name: 'Example',
     meta: { title: '审核管理', icon: 'example' },
     children: [
       {
@@ -138,6 +124,19 @@ export const constantRoutes = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: '提现审核', icon: 'table' }
+      },
+      {
+        path: 'address',
+        name: 'AddressList',
+        component: () => import('@/pages/address/List'),
+        // component: () => import('@/views/form/index'),
+        meta: { title: '地址管理', icon: 'link' }
+      },
+      {
+        path: 'comment',
+        name: 'CommentList',
+        component: () => import('@/pages/comment/List'),
+        meta: { title: '评论管理', icon: 'dashboard' }
       }
     ]
   },
