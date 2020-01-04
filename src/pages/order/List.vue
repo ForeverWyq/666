@@ -8,7 +8,8 @@
         <br>
         <!-- 按钮结束 -->
         <!-- 表格 -->
-        <el-table :data="orders.list">
+        <el-table :data="orders.list" ref="multipleTable"  tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="订单编号" prop="id"></el-table-column>
             <el-table-column label="下单时间" prop="orderTime"></el-table-column>
             <el-table-column label="总价" prop="total"></el-table-column>
@@ -71,6 +72,9 @@ import querystring from 'querystring'
 export default {
     // 用于存放网页中需要调用的方法
     methods:{
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
+        },
         pageChageHandler(page){
             this.params.page=page-1;
             this.loadData();

@@ -8,7 +8,8 @@
         <br>
         <!-- 按钮结束 -->
         <!-- 表格 -->
-        <el-table :data="customers">
+        <el-table :data="customers" ref="multipleTable" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="编号" prop="id"></el-table-column>
             <el-table-column label="用户名" prop="username"></el-table-column>
             <el-table-column label="姓名" prop="realname"></el-table-column>
@@ -73,6 +74,9 @@ export default {
     // 用于存放网页中需要调用的方法
     methods:{
         // 重载顾客信息
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
+        },
         loadData(){
             let url = "http://localhost:6677/customer/findAll"
             request.get(url).then((response)=>{
