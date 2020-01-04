@@ -102,6 +102,19 @@ export const constantRoutes = [
         path: 'product',
         component: () => import('@/pages/product/List'),
         meta: { title: '产品管理', icon:"form" }
+      },
+      {
+        path: 'address',
+        name: 'AddressList',
+        component: () => import('@/pages/address/List'),
+        // component: () => import('@/views/form/index'),
+        meta: { title: '地址管理', icon: 'link' }
+      },
+      {
+        path: 'comment',
+        name: 'CommentList',
+        component: () => import('@/pages/comment/List'),
+        meta: { title: '评论管理', icon: 'dashboard' }
       }
     ]
   },
@@ -124,19 +137,6 @@ export const constantRoutes = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: '提现审核', icon: 'table' }
-      },
-      {
-        path: 'address',
-        name: 'AddressList',
-        component: () => import('@/pages/address/List'),
-        // component: () => import('@/views/form/index'),
-        meta: { title: '地址管理', icon: 'link' }
-      },
-      {
-        path: 'comment',
-        name: 'CommentList',
-        component: () => import('@/pages/comment/List'),
-        meta: { title: '评论管理', icon: 'dashboard' }
       }
     ]
   },
