@@ -8,7 +8,7 @@
         <!-- 按钮结束 -->
         <br>
         <!-- 表格 -->
-        <el-table :data="customers">
+        <el-table :data="comments">
             <el-table-column label="编号" prop="id" fixed="left"></el-table-column>
             <el-table-column label="评论内容" prop="content" fixed="left"></el-table-column>
             <el-table-column label="评论时间" prop="commentTime" fixed="left"></el-table-column>
@@ -66,7 +66,7 @@ export default {
         loadData(){
             let url = "http://localhost:6677/comment/findAll"
             request.get(url).then((response)=>{
-                this.customers = response.data;
+                this.comments = response.data;
             })
         },
         // 录入评论信息
@@ -138,17 +138,13 @@ export default {
         return{
             title:"",
             visible:false,
-            customers:[],
+            comments:[],
             form:{}
         }
     },
     created(){
         // vue实例创建完毕
-        let url = "http://localhost:6677/comment/findAll"
-        request.get(url).then((response)=>{
-            // 将查询结果设置到customers中,this指向外部函数的this
-            this.customers = response.data;
-        })
+        this.loadData();
     }
 }
 </script>

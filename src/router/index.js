@@ -96,7 +96,7 @@ export const constantRoutes = [
         path: 'category',
         component: () => import('@/pages/category/List'), // Parent router-view
         // name: 'Menu1',
-        meta: { title: '栏目管理', icon:"form" },
+        meta: { title: '栏目管理', icon:"nested" },
       },
       {
         path: 'product',

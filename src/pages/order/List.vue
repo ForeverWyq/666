@@ -16,7 +16,7 @@
             <el-table-column label="顾客Id" prop="customerId"></el-table-column>
             <el-table-column label="员工Id" prop="waiterId"></el-table-column>
             <el-table-column label="地址Id" prop="addressId"></el-table-column>
-            <el-table-column fixed="right" label="操作">
+            <el-table-column label="操作">
                 <template v-slot="slot">
                     <a href="" @click.prevent="toDeleteHandler(slot.row.id)">
                         <i class="el-icon-delete"></i></a>
@@ -29,8 +29,8 @@
         <!-- 分页 -->
         <el-pagination
             layout="prev, pager, next"
-            :total="orders.title" 
-            @current-change="pageChageHandler(page)">
+            :total="orders.total"
+            @current-change="pageChageHandler">
         </el-pagination>
         <!-- 分页结束 -->
         <!-- 模态框 -->
@@ -85,7 +85,7 @@ export default {
                 },
                 data:querystring.stringify(this.params)
             }).then((response)=>{
-                this.orders=response.data;
+                this.orders=response.data
             })
         },
         // 录入订单信息
@@ -126,6 +126,10 @@ export default {
             })
             
         },
+        pageChageHandler(page){
+            this.params.page=page-1;
+            this.loadData();
+        },
         // 录入界面中点击确定调用的保存方法
         submitHandler(){
 
@@ -141,7 +145,7 @@ export default {
             visible:false,
             orders:{},
             form:{
-                type:"orders"
+                type:"order"
             },
             params:{
                 page:0,
@@ -151,11 +155,7 @@ export default {
     },
     created(){
         // vue实例创建完毕
-        let url = "http://localhost:6677/order/findAll"
-        request.get(url).then((response)=>{
-            // 将查询结果设置到customers中,this指向外部函数的this
-            this.orders = response.data;
-        })
+        this.loadData();
     }
 }
 </script>
