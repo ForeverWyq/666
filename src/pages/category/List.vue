@@ -8,7 +8,8 @@
         <!-- 按钮结束 -->
         <br>
         <!-- 表格 -->
-        <el-table :data="categorys">
+        <el-table :data="categorys" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="55"></el-table-column>
             <el-table-column label="编号" prop="id" fixed="left"></el-table-column>
             <el-table-column label="栏目名称" prop="name" fixed="left"></el-table-column>
             <el-table-column label="序号" prop="num" fixed="left"></el-table-column>
@@ -126,6 +127,9 @@ export default {
                 })
             })
         },
+        handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
         closeModalHandler(){
             this.visible=false;
         }
