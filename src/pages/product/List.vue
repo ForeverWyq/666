@@ -58,21 +58,17 @@
                     placeholder="请输入内容" v-model="form.description">
                     </el-input>
                 </el-form-item>
-              <el-form-item label="产品主图">
-                <el-upload
-              class="upload-demo"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
-              :limit="3"
-              :on-exceed="handleExceed"
-              :file-list="fileList">
-              <el-button size="small" type="primary">点击上传</el-button>
-              <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-            </el-upload>
-            </el-form-item>
+                <el-form-item label="图片">
+                    <el-upload
+                        class="upload-demo"
+                        action="http://134.175.154.93:6677/file/upload"
+                        :file-list="fileList"
+                        :on-success="uploadSuccessHandler"
+                        list-type="picture">
+                        <el-button size="small" type="primary">点击上传</el-button>
+                        <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                    </el-upload>
+                </el-form-item>
             </el-form>
             <span slot="footer" class="dialog-footer">
               <el-button size="small"
@@ -112,12 +108,14 @@ export default {
                 type:"product"
             }
             this.visible=true;
+            this.fileList=[];
         },
         // 修改栏目信息
         toUpdateHandler(row){
             this.title="修改产品信息"
             this.form=row;
             this.visible=true;
+            this.fileList=[];
         },
         // 删除
         toDeleteHandler(id){
@@ -171,6 +169,11 @@ export default {
         },
         handleSelectionChange(val) {
             this.multipleSelection = val;
+        },
+        uploadSuccessHandler(response){
+            let photo="http://134.175.154.93:8888/group1/"+response.data.id
+            console.log(response);
+            this.form.photo=photo;
         }
     },
     //用于存放要向网页中显示的数据
@@ -182,7 +185,8 @@ export default {
             options: [],
             form:{
                 type:"product"
-            }
+            },
+            fileList:[]
         }
     },
     created(){
