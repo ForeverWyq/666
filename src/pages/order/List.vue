@@ -2,30 +2,30 @@
   <div>
     <!-- 选项卡 -->
     <el-tabs v-model="params.status" @tab-click="loadData">
-      <el-tab-pane label="全部" name="全部"></el-tab-pane>
-      <el-tab-pane label="待派单" name="待派单"></el-tab-pane>
-      <el-tab-pane label="待接单" name="待接单"></el-tab-pane>
-      <el-tab-pane label="待服务" name="待服务"></el-tab-pane>
-      <el-tab-pane label="待确认" name="待确认"></el-tab-pane>
-      <el-tab-pane label="已完成" name="已完成"></el-tab-pane>
+        <el-tab-pane label="全部" name="全部"></el-tab-pane>
+        <el-tab-pane label="待派单" name="待派单"></el-tab-pane>
+        <el-tab-pane label="待接单" name="待接单"></el-tab-pane>
+        <el-tab-pane label="待服务" name="待服务"></el-tab-pane>
+        <el-tab-pane label="待确认" name="待确认"></el-tab-pane>
+        <el-tab-pane label="已完成" name="已完成"></el-tab-pane>
     </el-tabs>
     <!-- /选项卡 -->
     <!-- 表格 -->
     <el-table :data="orders.list">
-      <el-table-column prop="id" label="编号"></el-table-column>
-      <el-table-column width="200" prop="orderTime" label="下单时间"></el-table-column>
-      <el-table-column prop="total" label="总价"></el-table-column>
-      <el-table-column prop="status" label="状态"></el-table-column>
-      <el-table-column prop="customerId" label="顾客ID"></el-table-column>
-      <el-table-column prop="waiterId" label="员工ID"></el-table-column>
-      <el-table-column prop="addressId" label="地址ID"></el-table-column>
-      <el-table-column fixed="right" label="操作">
+        <el-table-column prop="id" label="编号"></el-table-column>
+        <el-table-column width="200" prop="orderTime" label="下单时间"></el-table-column>
+        <el-table-column prop="total" label="总价"></el-table-column>
+        <el-table-column prop="status" label="状态"></el-table-column>
+        <el-table-column prop="customerId" label="顾客ID"></el-table-column>
+        <el-table-column prop="waiterId" label="员工ID"></el-table-column>
+        <el-table-column prop="addressId" label="地址ID"></el-table-column>
+        <el-table-column fixed="right" label="操作">
         <template v-slot="slot">
-          <a href="javascript:void(0)" >详情</a>
-          <a href="" v-if="slot.row.status === '待派单'" @click.prevent="toSendOrderHandler(slot.row)">派单</a>
+            <a href="javascript:void(0)" >详情</a>
+            <a href="" v-if="slot.row.status === '待派单'" @click.prevent="toSendOrderHandler(slot.row)">派单</a>
           
         </template>
-      </el-table-column>
+        </el-table-column>
     </el-table>
     <!-- /表格结束 -->
     <!-- 分页开始 -->
@@ -37,32 +37,53 @@
         </el-pagination>
     <!-- /分页结束 -->
     <!-- 模态框 -->
-    <el-dialog
+    <!-- <el-dialog
       title="派单"
       :visible.sync="visible"
       width="60%">
-      <div>
-        <p> <strong>订单编号：</strong> {{form.id}} </p>
-        <p> <strong>订单总价：</strong> {{form.total}} </p>
-        <p> <strong>下单时间：</strong> {{form.orderTime}} </p>
-        <p> 
-          <strong>服务员工：</strong> 
-           <el-radio-group v-model="waiterId">
-            <el-radio 
-              border
-              size="small"
-              v-for="e in employees" 
-              :key="e.id"
-              :label="e.id" >{{e.realname}}</el-radio>
-          </el-radio-group>
-          
-        </p>
-      </div>
+        <div>
+          <p> <strong>订单编号：</strong> {{form.id}} </p>
+          <p> <strong>订单总价：</strong> {{form.total}} </p>
+          <p> <strong>下单时间：</strong> {{form.orderTime}} </p>
+          <p> 
+            <strong>服务员工：</strong> 
+            <el-radio-group v-model="waiterId">
+              <el-radio 
+                border
+                size="small"
+                v-for="e in employees" 
+                :key="e.id"
+                :label="e.id" >{{e.realname}}</el-radio>
+            </el-radio-group>
+            
+          </p>
+        </div>
 
       <span slot="footer" class="dialog-footer">
         <el-button size="small" @click="closeModalHandler">取 消</el-button>
         <el-button size="small" type="primary" @click="submitHandler">确 定</el-button>
       </span>
+    </el-dialog> -->
+    <el-dialog title="派单" :visible.sync="visible" width="50%">
+    <div style="paddingLeft:2em">
+        <p> <strong>订单编号: </strong> {{form.id}} </p> <br>
+        <p> <strong>订单总价: </strong> {{form.total}} </p> <br>
+        <p> <strong>下单时间: </strong> {{form.orderTime}} </p> <br>
+        <p>
+        <strong>派送员工:</strong>
+        <el-select v-model="waiterId" placeholder="请选择">
+          <el-option v-for="e in employees" :key="e.id"
+          :label="e.realname" :value="e.id">
+          </el-option>
+        </el-select>
+        </p>
+        </div>
+        <span slot="footer" class="dialog-footer">
+          <el-button size="small"
+          @click="closeModalHandler">取 消</el-button>
+          <el-button type="primary" size="small"
+          @click="submitHandler">确 定</el-button>
+        </span>
     </el-dialog>
     <!-- /模态框 -->
 
