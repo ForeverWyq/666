@@ -3,14 +3,14 @@
         地址管理
         <br><br>
         <!-- 按钮 -->
-        <el-button type="primary" size="small" @click="toAddHandler">添加</el-button>
-        <el-button type="danger" size="small">批量删除</el-button>
+        <!-- <el-button type="primary" size="small" @click="toAddHandler">添加</el-button> -->
+        <!-- <el-button type="danger" size="small">批量删除</el-button> -->
         <!-- 按钮结束 -->
         <br>
         <!-- 表格 -->
         <el-table ref="multipleTable" :data="addresss" tooltip-effect="dark" 
         style="width: 100%" @selection-change="handleSelectionChange">
-            <el-table-column type="selection" width="55"></el-table-column>
+            <!-- <el-table-column type="selection" width="55"></el-table-column> -->
             <el-table-column label="编号" prop="id" fixed="left"></el-table-column>
             <el-table-column label="省" prop="province" fixed="left"></el-table-column>
             <el-table-column label="市" prop="city" fixed="left"></el-table-column>
@@ -18,14 +18,14 @@
             <el-table-column label="具体地址" prop="address"></el-table-column>
             <el-table-column label="电话" prop="telephone"></el-table-column>
             <el-table-column label="顾客id" prop="customerId"></el-table-column>
-            <el-table-column label="操作" fixed="right">
-                <template v-slot="slot">
+            <!-- <el-table-column label="操作" fixed="right"> -->
+                <!-- <template v-slot="slot">
                     <a href="" @click.prevent="toDeleteHandler(slot.row.id)">
                         <i class="el-icon-delete"></i></a>
                     <a href="" @click.prevent="toUpdateHandler(slot.row)">
                         <i class="el-icon-edit"></i></a>
-                </template>
-            </el-table-column>
+                </template> -->
+            <!-- </el-table-column> -->
         </el-table>
         <!-- 表格结束 -->
         <!-- 分页 -->
