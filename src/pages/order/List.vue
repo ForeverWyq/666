@@ -23,7 +23,6 @@
         <template v-slot="slot">
             <a href="javascript:void(0)" >详情</a>
             <a href="" v-if="slot.row.status === '待派单'" @click.prevent="toSendOrderHandler(slot.row)">派单</a>
-          
         </template>
         </el-table-column>
     </el-table>
@@ -37,33 +36,6 @@
         </el-pagination>
     <!-- /分页结束 -->
     <!-- 模态框 -->
-    <!-- <el-dialog
-      title="派单"
-      :visible.sync="visible"
-      width="60%">
-        <div>
-          <p> <strong>订单编号：</strong> {{form.id}} </p>
-          <p> <strong>订单总价：</strong> {{form.total}} </p>
-          <p> <strong>下单时间：</strong> {{form.orderTime}} </p>
-          <p> 
-            <strong>服务员工：</strong> 
-            <el-radio-group v-model="waiterId">
-              <el-radio 
-                border
-                size="small"
-                v-for="e in employees" 
-                :key="e.id"
-                :label="e.id" >{{e.realname}}</el-radio>
-            </el-radio-group>
-            
-          </p>
-        </div>
-
-      <span slot="footer" class="dialog-footer">
-        <el-button size="small" @click="closeModalHandler">取 消</el-button>
-        <el-button size="small" type="primary" @click="submitHandler">确 定</el-button>
-      </span>
-    </el-dialog> -->
     <el-dialog title="派单" :visible.sync="visible" width="50%">
     <div style="paddingLeft:2em">
         <p> <strong>订单编号: </strong> {{form.id}} </p> <br>
@@ -86,10 +58,8 @@
         </span>
     </el-dialog>
     <!-- /模态框 -->
-
   </div>
 </template>
-
 <script>
 import request from '@/utils/request'
 import querystring from 'querystring'
@@ -182,7 +152,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
  
 </style>
