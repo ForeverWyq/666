@@ -170,9 +170,11 @@ export default {
         handleSelectionChange(val) {
             this.multipleSelection = val;
         },
+        //上传成功的时间处理函数
         uploadSuccessHandler(response){
             let photo="http://134.175.154.93:8888/group1/"+response.data.id
             console.log(response);
+        //将图片地址设置到form中，便于一起提交给后台
             this.form.photo=photo;
         }
     },
